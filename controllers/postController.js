@@ -8,6 +8,8 @@ class PostController {
         return res.json({post})
     }
 
+    // функция createAll, для нескольких постов
+
     async getAll(req, res){
         const posts = await Post.findAll()
         return res.json(posts)
