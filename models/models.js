@@ -20,18 +20,18 @@ const Theme = sequelize.define('theme', {
 
 const Post = sequelize.define('post', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    text: {type: DataTypes.STRING},
+    text: {type: DataTypes.STRING, allowNull: false},
 })
 
 const Comment = sequelize.define('comment', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    text: {type: DataTypes.STRING},
+    text: {type: DataTypes.STRING, allowNull: false},
     //post_id: {type: DataTypes.STRING},
 })
 
 const Picture = sequelize.define('picture', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    blob: {type: DataTypes.STRING}, //возможно можно хранить как блоб
+    img: {type: DataTypes.STRING, allowNull: false}, //возможно можно хранить как блоб
     //post_id: {type: DataTypes.INTEGER},
     //comment_id: {type: DataTypes.INTEGER},
 })
@@ -41,7 +41,8 @@ const Comment_Mark = sequelize.define('comment_mark', {
     //user_id: {type: DataTypes.INTEGER},
     //comment_id: {type: DataTypes.INTEGER},
     toxic: {type: DataTypes.INTEGER},
-    emotional: {type: DataTypes.INTEGER},
+    emotional_positive: {type: DataTypes.INTEGER},
+    emotional_negative: {type: DataTypes.INTEGER},
     rude: {type: DataTypes.INTEGER},
     individual_obscene: {type: DataTypes.INTEGER},
     group_obscene: {type: DataTypes.INTEGER},
@@ -53,7 +54,8 @@ const Post_Mark = sequelize.define('post_mark', {
     //user_id: {type: DataTypes.INTEGER},
     //post_id: {type: DataTypes.INTEGER},
     toxic: {type: DataTypes.INTEGER},
-    emotional: {type: DataTypes.INTEGER},
+    emotional_positive: {type: DataTypes.INTEGER},
+    emotional_negative: {type: DataTypes.INTEGER},
     rude: {type: DataTypes.INTEGER},
     individual_obscene: {type: DataTypes.INTEGER},
     group_obscene: {type: DataTypes.INTEGER},
@@ -65,7 +67,8 @@ const Picture_Mark = sequelize.define('picture_mark', {
     //user_id: {type: DataTypes.INTEGER},
     //picture_id: {type: DataTypes.INTEGER},
     toxic: {type: DataTypes.INTEGER},
-    emotional: {type: DataTypes.INTEGER},
+    emotional_positive: {type: DataTypes.INTEGER},
+    emotional_negative: {type: DataTypes.INTEGER},
     rude: {type: DataTypes.INTEGER},
     individual_obscene: {type: DataTypes.INTEGER},
     group_obscene: {type: DataTypes.INTEGER},
