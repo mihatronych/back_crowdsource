@@ -1,0 +1,23 @@
+const Router = require('express')
+const router = new Router()
+const commentMarkRouter = require('./commentMarkRouter')
+const commentRouter = require('./commentRouter')
+const pictureMarkRouter = require('./pictureMarkRouter')
+const pictureRouter = require('./pictureRouter')
+const postMarkRouter = require('./postMarkRouter')
+const postRouter = require('./postRouter')
+const roleRouter = require('./roleRouter')
+const themeRouter = require('./themeRouter')
+const userRouter = require('./userRouter')
+
+router.use('/commentMark', commentMarkRouter)
+router.use('/comment', commentRouter)
+router.use('/pictureMark', pictureMarkRouter)
+router.use('/picture', pictureRouter)
+router.use('/postMark', postMarkRouter)
+router.use('/post', postRouter)
+router.use('/role', roleRouter)
+router.use('/theme', themeRouter)
+router.use('/user', userRouter)
+
+module.exports = router
