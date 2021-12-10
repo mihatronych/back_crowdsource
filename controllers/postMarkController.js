@@ -10,6 +10,8 @@ class PostMarkController {
         return res.json({post_mark})
     }
 
+    // функция createAll, для нескольких постов
+
     async getAll(req, res){
         let {userId, postId} = req.query
         let post_marks

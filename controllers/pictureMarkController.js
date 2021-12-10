@@ -10,6 +10,8 @@ class PictureMarkController {
         return res.json({picture_mark})
     }
 
+    // функция createAll, для нескольких постов
+
     async getAll(req, res){
         let {userId, pictureId} = req.query
         let picture_marks

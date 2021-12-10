@@ -8,6 +8,8 @@ class CommentController {
         return res.json({comment})
     }
 
+    // функция createAll, для нескольких постов
+
     async getAll(req, res){
         let {postId, commentId} = req.query
         let comments

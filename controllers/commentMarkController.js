@@ -10,6 +10,8 @@ class CommentMarkController {
         return res.json({comment_mark})
     }
 
+    // функция createAll, для нескольких постов
+
     async getAll(req, res){
         let {userId, commentId} = req.query
         let comment_marks
