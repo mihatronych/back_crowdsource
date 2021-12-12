@@ -3,14 +3,18 @@ const ApiError = require('../error/ApiError')
 
 class PictureMarkController {
     async create(req, res){
-        const {userId, pictureId, toxic, emotional_positive,
-            emotional_negative, rude, individual_obscene, group_obscene} = req.body
-        const picture_mark = await Picture_Mark.create({userId, pictureId, toxic, emotional_positive,
-            emotional_negative, rude, individual_obscene, group_obscene})
-        return res.json({picture_mark})
+        const {values} = req.body
+        let results = []
+        values.forEach(val => async () =>{
+            const {userId, pictureId, toxic, emotional_positive,
+                emotional_negative, rude, individual_obscene, group_obscene} = val
+            const picture_mark = await Picture_Mark.create({userId, pictureId, toxic, emotional_positive,
+                emotional_negative, rude, individual_obscene, group_obscene})
+            results.push(picture_mark)
+        })
+        return res.json({results})
     }
 
-    // функция createAll, для нескольких постов
 
     async getAll(req, res){
         let {userId, pictureId} = req.query

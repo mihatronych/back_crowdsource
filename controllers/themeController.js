@@ -3,9 +3,14 @@ const ApiError = require('../error/ApiError')
 
 class ThemeController {
     async create(req, res){
-        const {name} = req.body
-        const theme = await Theme.create({theme:name})
-        return res.json({theme})
+        const {values} = req.body
+        let results = []
+        values.forEach(val => async () =>{
+            const {name} = val
+            const theme = await Theme.create({theme:name})
+            results.push(theme)
+        })
+        return res.json({results})
     }
 
     async getAll(req, res){

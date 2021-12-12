@@ -3,9 +3,14 @@ const ApiError = require('../error/ApiError')
 
 class RoleController {
     async create(req, res){
-        const {name} = req.body
-        const role = await Role.create({role:name})
-        return res.json({role})
+        const {values} = req.body
+        let results = []
+        values.forEach(val => async () =>{
+            const {name} = val
+            const role = await Role.create({role:name})
+            results.push(role)
+        })
+        return res.json({results})
     }
 
     async getAll(req, res){

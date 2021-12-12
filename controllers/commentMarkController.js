@@ -3,11 +3,16 @@ const ApiError = require('../error/ApiError')
 
 class CommentMarkController {
     async create(req, res){
-        const {userId, commentId, toxic, emotional_positive,
-            emotional_negative, rude, individual_obscene, group_obscene} = req.body
-        const comment_mark = await Comment_Mark.create({userId, commentId, toxic, emotional_positive,
-            emotional_negative, rude, individual_obscene, group_obscene})
-        return res.json({comment_mark})
+        const {values} = req.body
+        let results = []
+        values.forEach(val => async () =>{
+            const {userId, commentId, toxic, emotional_positive,
+                emotional_negative, rude, individual_obscene, group_obscene} = val
+            const comment_mark = await Comment_Mark.create({userId, commentId, toxic, emotional_positive,
+                emotional_negative, rude, individual_obscene, group_obscene})
+            results.push(comment_mark)
+        })
+        return res.json({results})
     }
 
     // функция createAll, для нескольких постов

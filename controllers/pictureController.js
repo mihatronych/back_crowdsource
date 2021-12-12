@@ -4,18 +4,21 @@ const uuid = require('uuid')
 const path = require('path')
 
 class PictureController {
-    async create(req, res, next){
-        try {
-            const {postId, commentId} = req.body // чтобы картинку добавить, нужно отправлять Body/form-data
-            const {img} = req.files
+    async create(req, res){
+        const {values} = req.body
+        const {images} = req.files
+        let results = []
+        let i = 0
+        values.forEach(val => async () =>{
+            const {postId, commentId} = val
             let fileName = uuid.v4() + '.jpg'
-            await img.mv(path.resolve(__dirname, '..', 'static', fileName))
+            await images[i].mv(path.resolve(__dirname, '..', 'static', fileName))
 
             const picture = await Picture.create({img: fileName, postId: postId, commentId: commentId})
-            return res.json({picture})
-        }catch (e) {
-            next(ApiError.badRequest(e.message))
-        }
+
+            results.push(picture)
+        })
+        return res.json({results})
     }
 
     // функция createAll, для нескольких постов
@@ -43,7 +46,7 @@ class PictureController {
         const  picture = await Picture.findOne(
             {where: {id}},
         )
-        return res.json(comment)
+        return res.json(picture)
     }
 }
 

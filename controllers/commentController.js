@@ -3,9 +3,14 @@ const ApiError = require('../error/ApiError')
 
 class CommentController {
     async create(req, res){
-        const {text, postId, commentId} = req.body
-        const comment = await Comment.create({text:text, postId:postId, commentId:commentId})
-        return res.json({comment})
+        const {values} = req.body
+        let results = []
+        values.forEach(val => async () =>{
+            const {text, postId, commentId} = val
+            const comment = await Comment.create({text:text, postId:postId, commentId:commentId})
+            results.push(comment)
+        })
+        return res.json({results})
     }
 
     // функция createAll, для нескольких постов
