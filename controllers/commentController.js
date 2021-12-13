@@ -40,6 +40,31 @@ class CommentController {
         )
         return res.json(comment)
     }
+
+    async update(req, res){
+        const {values} = req.body
+        let results = []
+        for(let i in values){
+            const {id, text} = values[i]
+            const comment = await (await Comment.findOne({where: {id}},))
+                .update({text:text})
+            results.push(comment)
+        }
+        return res.json({results})
+    }
+
+    async delete(req, res){
+        const {values} = req.body
+        let results = []
+        for(let i in values){
+            const {id} = values[i]
+            const comment = await (await Comment.findOne({where: {id}},))
+                .destroy()
+            results.push(comment)
+        }
+        return res.json({results})
+    }
 }
+
 
 module.exports = new CommentController()

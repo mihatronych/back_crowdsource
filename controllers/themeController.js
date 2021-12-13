@@ -48,12 +48,6 @@ class ThemeController {
                 .destroy()
             results.push(theme)
         }
-        values.forEach(val => async () =>{
-            const {id} = val
-            const theme = await (await Theme.findOne({where: {id}},))
-                .destroy()
-            results.push(theme)
-        })
         return res.json({results})
     }
 }

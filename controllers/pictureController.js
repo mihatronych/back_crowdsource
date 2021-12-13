@@ -47,6 +47,34 @@ class PictureController {
         )
         return res.json(picture)
     }
+
+    async update(req, res){
+        const {values} = req.body
+        const {images} = req.files
+        let results = []
+        for(let i in values){
+            const {id} = values[i]
+            let fileName = uuid.v4() + '.jpg'
+            await images[i].mv(path.resolve(__dirname, '..', 'static', fileName))
+
+            const picture = await (await Picture.findOne({where: {id}},))
+                .update({img:fileName})
+            results.push(picture)
+        }
+        return res.json({results})
+    }
+
+    async delete(req, res){
+        const {values} = req.body
+        let results = []
+        for(let i in values){
+            const {id} = values[i]
+            const picture = await (await Picture.findOne({where: {id}},))
+                .destroy()
+            results.push(picture)
+        }
+        return res.json({results})
+    }
 }
 
 module.exports = new PictureController()

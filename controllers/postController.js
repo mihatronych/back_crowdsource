@@ -27,6 +27,30 @@ class PostController {
         )
         return res.json(post)
     }
+
+    async update(req, res){
+        const {values} = req.body
+        let results = []
+        for(let i in values){
+            const {id, text} = values[i]
+            const comment = await (await Post.findOne({where: {id}},))
+                .update({text:text})
+            results.push(comment)
+        }
+        return res.json({results})
+    }
+
+    async delete(req, res){
+        const {values} = req.body
+        let results = []
+        for(let i in values){
+            const {id} = values[i]
+            const post = await (await Post.findOne({where: {id}},))
+                .destroy()
+            results.push(post)
+        }
+        return res.json({results})
+    }
 }
 
 module.exports = new PostController()
