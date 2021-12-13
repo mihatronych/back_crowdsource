@@ -5,13 +5,14 @@ class PostMarkController {
     async create(req, res){
         const {values} = req.body
         let results = []
-        values.forEach(val => async () =>{
+        for(let i in values){
             const {userId, postId, toxic, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene} = val
+                emotional_negative, rude, individual_obscene, group_obscene} = values[i]
             const post_mark = await Post_Mark.create({userId, postId, toxic, emotional_positive,
                 emotional_negative, rude, individual_obscene, group_obscene})
             results.push(post_mark)
-        })
+        }
+
         return res.json({results})
     }
 

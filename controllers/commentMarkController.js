@@ -5,13 +5,13 @@ class CommentMarkController {
     async create(req, res){
         const {values} = req.body
         let results = []
-        values.forEach(val => async () =>{
+        for(let i in values){
             const {userId, commentId, toxic, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene} = val
+                emotional_negative, rude, individual_obscene, group_obscene} = values[i]
             const comment_mark = await Comment_Mark.create({userId, commentId, toxic, emotional_positive,
                 emotional_negative, rude, individual_obscene, group_obscene})
             results.push(comment_mark)
-        })
+        }
         return res.json({results})
     }
 

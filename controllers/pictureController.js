@@ -8,16 +8,15 @@ class PictureController {
         const {values} = req.body
         const {images} = req.files
         let results = []
-        let i = 0
-        values.forEach(val => async () =>{
-            const {postId, commentId} = val
+        for(let i in values){
+            const {postId, commentId} = values[i]
             let fileName = uuid.v4() + '.jpg'
             await images[i].mv(path.resolve(__dirname, '..', 'static', fileName))
 
             const picture = await Picture.create({img: fileName, postId: postId, commentId: commentId})
 
             results.push(picture)
-        })
+        }
         return res.json({results})
     }
 

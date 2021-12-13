@@ -5,11 +5,11 @@ class RoleController {
     async create(req, res){
         const {values} = req.body
         let results = []
-        values.forEach(val => async () =>{
-            const {name} = val
+        for(let i in values){
+            const {name} = values[i]
             const role = await Role.create({role:name})
             results.push(role)
-        })
+        }
         return res.json({results})
     }
 

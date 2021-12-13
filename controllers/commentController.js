@@ -5,11 +5,11 @@ class CommentController {
     async create(req, res){
         const {values} = req.body
         let results = []
-        values.forEach(val => async () =>{
-            const {text, postId, commentId} = val
+        for(let i in values){
+            const {text, postId, commentId} = values[i]
             const comment = await Comment.create({text:text, postId:postId, commentId:commentId})
             results.push(comment)
-        })
+        }
         return res.json({results})
     }
 

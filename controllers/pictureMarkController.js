@@ -5,13 +5,13 @@ class PictureMarkController {
     async create(req, res){
         const {values} = req.body
         let results = []
-        values.forEach(val => async () =>{
+        for(let i in values){
             const {userId, pictureId, toxic, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene} = val
+                emotional_negative, rude, individual_obscene, group_obscene} = values[i]
             const picture_mark = await Picture_Mark.create({userId, pictureId, toxic, emotional_positive,
                 emotional_negative, rude, individual_obscene, group_obscene})
             results.push(picture_mark)
-        })
+        }
         return res.json({results})
     }
 

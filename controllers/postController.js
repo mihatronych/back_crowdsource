@@ -5,11 +5,11 @@ class PostController {
     async create(req, res){
         const {values} = req.body
         let results = []
-        values.forEach(val => async () =>{
-            const {text} = val
+        for(let i in values){
+            const {text} = values[i]
             const post = await Post.create({text:text})
             results.push(post)
-        })
+        }
         return res.json({results})
     }
 
