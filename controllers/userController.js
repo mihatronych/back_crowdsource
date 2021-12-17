@@ -20,5 +20,12 @@ class UserController {
         )
         return res.json(user)
     }
+    async getOneEmail(req, res){
+        const {email} = req.body
+        const user = await User.findOne(
+            {where: {email}},
+        )
+        return res.json(user)
+    }
 }
 module.exports = new UserController()
