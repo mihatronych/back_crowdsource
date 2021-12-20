@@ -116,6 +116,15 @@ Picture.belongsTo(Comment, {onDelete: 'CASCADE'})
 Comment.hasMany(Comment, {onDelete: 'CASCADE'})
 Comment.belongsTo(Comment, {onDelete: 'CASCADE'})
 
+Theme.hasMany(Post, {onDelete: 'CASCADE'})
+Post.belongsTo(Theme, {onDelete: 'CASCADE'})
+
+Theme.hasMany(Comment, {onDelete: 'CASCADE'})
+Comment.belongsTo(Theme, {onDelete: 'CASCADE'})
+
+Theme.hasMany(Picture, {onDelete: 'CASCADE'})
+Picture.belongsTo(Theme, {onDelete: 'CASCADE'})
+
 module.exports = {
     User,
     Role,

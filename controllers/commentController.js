@@ -16,19 +16,32 @@ class CommentController {
     // функция createAll, для нескольких постов
 
     async getAll(req, res){
-        let {postId, commentId} = req.query
+        let {postId, commentId, themeId} = req.query
         let comments
-        if(!postId && !commentId) {
+        if(!postId && !commentId && !themeId ) {
             comments = await Comment.findAll()
         }
-        if(postId && !commentId) {
+        if(postId && !commentId && !themeId) {
             comments = await Comment.findAll({where: {postId:postId}})
         }
-        if(!postId && commentId) {
+        if(!postId && commentId && !themeId) {
             comments = await Comment.findAll({where: {commentId:commentId}})
         }
-        if(postId && commentId) {
+        if(postId && commentId && !themeId) {
             comments = await Comment.findAll({where: {postId:postId, commentId: commentId}})
+        }
+
+        if(!postId && !commentId && themeId) {
+            comments = await Comment.findAll({where: {themeId: themeId}})
+        }
+        if(postId && !commentId && themeId) {
+            comments = await Comment.findAll({where: {postId:postId, themeId: themeId}})
+        }
+        if(!postId && commentId && themeId) {
+            comments = await Comment.findAll({where: {commentId: commentId, themeId: themeId}})
+        }
+        if(postId && commentId && themeId) {
+            comments = await Comment.findAll({where: {postId:postId, commentId: commentId, themeId: themeId}})
         }
         return res.json(comments)
     }

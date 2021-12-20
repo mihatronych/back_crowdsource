@@ -23,19 +23,32 @@ class PictureController {
     // функция createAll, для нескольких постов
 
     async getAll(req, res){
-        let {postId, commentId} = req.query
+        let {postId, commentId, themeId} = req.query
         let pictures
-        if(!postId && !commentId) {
-            pictures= await Picture.findAll()
+        if(!postId && !commentId && !themeId ) {
+            pictures = await Picture.findAll()
         }
-        if(postId && !commentId) {
+        if(postId && !commentId && !themeId) {
             pictures = await Picture.findAll({where: {postId:postId}})
         }
-        if(!postId && commentId) {
+        if(!postId && commentId && !themeId) {
             pictures = await Picture.findAll({where: {commentId:commentId}})
         }
-        if(postId && commentId) {
+        if(postId && commentId && !themeId) {
             pictures = await Picture.findAll({where: {postId:postId, commentId: commentId}})
+        }
+
+        if(!postId && !commentId && themeId) {
+            pictures = await Picture.findAll({where: {themeId: themeId}})
+        }
+        if(postId && !commentId && themeId) {
+            pictures = await Picture.findAll({where: {postId:postId, themeId: themeId}})
+        }
+        if(!postId && commentId && themeId) {
+            pictures = await Picture.findAll({where: {commentId: commentId, themeId: themeId}})
+        }
+        if(postId && commentId && themeId) {
+            pictures = await Picture.findAll({where: {postId:postId, commentId: commentId, themeId: themeId}})
         }
         return res.json(pictures)
     }

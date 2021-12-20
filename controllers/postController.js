@@ -16,7 +16,14 @@ class PostController {
     // функция createAll, для нескольких постов
 
     async getAll(req, res){
-        const posts = await Post.findAll()
+        let {themeId} = req.query
+        let posts
+        if(!themeId ) {
+            posts = await Post.findAll()
+        }
+        if(themeId) {
+            posts = await Post.findAll({where: {themeId:themeId}})
+        }
         return res.json(posts)
     }
 
