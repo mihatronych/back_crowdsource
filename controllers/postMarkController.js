@@ -19,19 +19,31 @@ class PostMarkController {
     // функция createAll, для нескольких постов
 
     async getAll(req, res){
-        let {userId, postId} = req.query
+        let {userId, postId, themeId} = req.query
         let post_marks
-        if(!userId && !postId) {
+        if(!userId && !postId && !themeId) {
             post_marks = await Post_Mark.findAll()
         }
-        if(userId && !postId) {
+        if(userId && !postId && !themeId) {
             post_marks = await Post_Mark.findAll({where: {userId:userId}})
         }
-        if(!userId && postId) {
+        if(!userId && postId && !themeId) {
             post_marks = await Post_Mark.findAll({where: {postId:postId}})
         }
-        if(userId && postId) {
+        if(userId && postId && !themeId) {
             post_marks = await Post_Mark.findAll({where: {userId:userId, postId: postId}})
+        }
+        if(!userId && postId && themeId) {
+            post_marks = await Post_Mark.findAll({where: {themeId: themeId}})
+        }
+        if(userId && !postId && themeId) {
+            post_marks = await Post_Mark.findAll({where: {userId:userId, themeId: themeId}})
+        }
+        if(!userId && postId && themeId) {
+            post_marks = await Post_Mark.findAll({where: {postId:postId, themeId: themeId}})
+        }
+        if(userId && postId && themeId) {
+            post_marks = await Post_Mark.findAll({where: {postId:postId, userId:userId, themeId: themeId}})
         }
         return res.json(post_marks)
     }

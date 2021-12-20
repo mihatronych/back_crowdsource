@@ -17,19 +17,32 @@ class PictureMarkController {
 
 
     async getAll(req, res){
-        let {userId, pictureId} = req.query
+        let {userId, pictureId, themeId} = req.query
         let picture_marks
-        if(!userId && !pictureId) {
+        if(!userId && !pictureId && !themeId) {
             picture_marks = await Picture_Mark.findAll()
         }
-        if(userId && !pictureId) {
+        if(userId && !pictureId && !themeId) {
             picture_marks = await Picture_Mark.findAll({where: {userId:userId}})
         }
-        if(!userId && pictureId) {
+        if(!userId && pictureId && !themeId) {
             picture_marks = await Picture_Mark.findAll({where: {pictureId:pictureId}})
         }
-        if(userId && pictureId) {
+        if(userId && pictureId && !themeId) {
             picture_marks = await Picture_Mark.findAll({where: {userId:userId, pictureId: pictureId}})
+        }
+
+        if(!userId && pictureId && themeId) {
+            picture_marks = await Picture_Mark.findAll({where: {themeId: themeId}})
+        }
+        if(userId && !pictureId && themeId) {
+            picture_marks = await Picture_Mark.findAll({where: {userId:userId, themeId: themeId}})
+        }
+        if(!userId && pictureId && themeId) {
+            picture_marks = await Picture_Mark.findAll({where: {pictureId: pictureId, themeId: themeId}})
+        }
+        if(userId && pictureId && themeId) {
+            picture_marks = await Picture_Mark.findAll({where: {userId:userId, pictureId: pictureId, themeId: themeId}})
         }
         return res.json(picture_marks)
     }

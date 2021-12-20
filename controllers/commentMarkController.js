@@ -18,19 +18,31 @@ class CommentMarkController {
     // функция createAll, для нескольких постов
 
     async getAll(req, res){
-        let {userId, commentId} = req.query
+        let {userId, commentId,themeId} = req.query
         let comment_marks
-        if(!userId && !commentId) {
+        if(!userId && !commentId && !themeId) {
             comment_marks = await Comment_Mark.findAll()
         }
-        if(userId && !commentId) {
+        if(userId && !commentId && !themeId) {
             comment_marks = await Comment_Mark.findAll({where: {userId:userId}})
         }
-        if(!userId && commentId) {
+        if(!userId && commentId && !themeId) {
             comment_marks = await Comment_Mark.findAll({where: {commentId:commentId}})
         }
-        if(userId && commentId) {
+        if(userId && commentId && !themeId) {
             comment_marks = await Comment_Mark.findAll({where: {userId:userId, commentId: commentId}})
+        }
+        if(!userId && !commentId && themeId) {
+            comment_marks = await Comment_Mark.findAll({where: {themeId: themeId}})
+        }
+        if(userId && !commentId && themeId) {
+            comment_marks = await Comment_Mark.findAll({where: {userId:userId, themeId: themeId}})
+        }
+        if(!userId && commentId && themeId) {
+            comment_marks = await Comment_Mark.findAll({where: {commentId: commentId, themeId: themeId}})
+        }
+        if(userId && commentId && themeId) {
+            comment_marks = await Comment_Mark.findAll({where: {userId:userId, commentId: commentId, themeId: themeId}})
         }
         return res.json(comment_marks)
     }
