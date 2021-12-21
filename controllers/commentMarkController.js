@@ -6,9 +6,9 @@ class CommentMarkController {
         const {values} = req.body
         let results = []
         for(let i in values){
-            const {userId, commentId, toxic, emotional_positive,
+            const {userId, commentId, themeId, toxic, emotional_positive,
                 emotional_negative, rude, individual_obscene, group_obscene} = values[i]
-            const comment_mark = await Comment_Mark.create({userId, commentId, toxic, emotional_positive,
+            const comment_mark = await Comment_Mark.create({userId, commentId, toxic, themeId, emotional_positive,
                 emotional_negative, rude, individual_obscene, group_obscene})
             results.push(comment_mark)
         }
