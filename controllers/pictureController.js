@@ -5,18 +5,13 @@ const path = require('path')
 
 class PictureController {
     async create(req, res){
-        const {values} = req.body
+        const {postId, commentId} = req.body
         const {images} = req.files
         let results = []
-        for(let i in values){
-            const {postId, commentId} = values[i]
-            let fileName = uuid.v4() + '.jpg'
-            await images[i].mv(path.resolve(__dirname, '..', 'static', fileName))
-
-            const picture = await Picture.create({img: fileName, postId: postId, commentId: commentId})
-
-            results.push(picture)
-        }
+        let fileName = uuid.v4() + '.jpg'
+        await images.mv(path.resolve(__dirname, '..', 'static', fileName))
+        const picture = await Picture.create({img: fileName, postId: postId, commentId: commentId})
+        results.push(picture)
         return res.json({results})
     }
 
