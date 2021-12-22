@@ -115,10 +115,15 @@ class CommentController {
                 results = response.data
             });
             console.log(results)
+            let counted = []
             for (let c in comments) {
-                
+                counted.push({id: comments[c].id ,
+                text: comments[c].text,
+                toxic1: crowd_counts[c].toxic,
+                toxic2: results[c].toxic})
             }
-            return res.json(comments)
+            console.log(counted)
+            return res.json(counted)
         }
         catch (e) {
             console.log(e.message)
