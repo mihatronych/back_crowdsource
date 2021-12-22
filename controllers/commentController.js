@@ -109,8 +109,8 @@ class CommentController {
             let commentz = {messages: messages}
             console.log(commentz)
             let results
-            console.log(process.env.TOXIC_API_FAKE + '/toxicity_py/api/messages')
-            await axios.get(process.env.TOXIC_API_FAKE + '/toxicity_py/api/messages', {data:
+            console.log(process.env.TOXIC_API + '/toxicity_py/api/messages')
+            await axios.get(process.env.TOXIC_API + '/toxicity_py/api/messages', {data:
                     commentz}).then(response => {
                 results = response.data
             });
