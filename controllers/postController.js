@@ -6,8 +6,8 @@ class PostController {
         const {values} = req.body
         let results = []
         for(let i in values){
-            const {text} = values[i]
-            const post = await Post.create({text:text})
+            const {text, themeId} = values[i]
+            const post = await Post.create({text:text, themeId:themeId})
             results.push(post)
         }
         return res.json({results})
