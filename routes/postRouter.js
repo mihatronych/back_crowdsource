@@ -4,8 +4,10 @@ const postController = require('../controllers/postController')
 
 router.post('/', postController.create)
 router.get('/', postController.getAll)
+router.get('/getAllWithCount/', postController.getAllWithCount)
 router.get('/:id', postController.getOne)
 router.put('/',postController.update)
 router.delete('/',postController.delete)
+
 
 module.exports = router
