@@ -110,6 +110,7 @@ class PostController {
             let counted = []
             for (let c in posts) {
                 counted.push({id: posts[c].id ,
+                    themeId: posts[c].themeId ,
                     text: posts[c].text,
                     toxic1: crowd_counts[c].toxic,
                     toxic2: results[c].toxic})

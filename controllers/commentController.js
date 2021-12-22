@@ -118,6 +118,7 @@ class CommentController {
             let counted = []
             for (let c in comments) {
                 counted.push({id: comments[c].id ,
+                    themeId: comments[c].themeId ,
                 text: comments[c].text,
                 toxic1: crowd_counts[c].toxic,
                 toxic2: results[c].toxic})
