@@ -19,18 +19,18 @@ const Theme = sequelize.define('theme', {
 
 const Post = sequelize.define('post', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    text: {type: DataTypes.STRING, allowNull: false},
+    text: {type: DataTypes.TEXT, allowNull: false},
 })
 
 const Comment = sequelize.define('comment', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    text: {type: DataTypes.STRING, allowNull: false},
+    text: {type: DataTypes.TEXT, allowNull: false},
     //post_id: {type: DataTypes.STRING},
 })
 
 const Picture = sequelize.define('picture', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    img: {type: DataTypes.STRING, allowNull: false}, //возможно можно хранить как блоб
+    img: {type: DataTypes.TEXT, allowNull: false}, //возможно можно хранить как блоб
     //post_id: {type: DataTypes.INTEGER},
     //comment_id: {type: DataTypes.INTEGER},
 })

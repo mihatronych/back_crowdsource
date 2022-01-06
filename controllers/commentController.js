@@ -7,14 +7,24 @@ const {json} = require("express");
 
 class CommentController {
     async create(req, res){
-        const {values} = req.body
-        let results = []
-        for(let i in values){
-            const {text, postId, commentId, themeId} = values[i]
-            const comment = await Comment.create({text:text, postId:postId, commentId:commentId, themeId:themeId})
-            results.push(comment)
+        try {
+            const {values} = req.body
+            let results = []
+            for (let i in values) {
+                const {text, postId, commentId, themeId} = values[i]
+                const comment = await Comment.create({
+                    text: text,
+                    postId: postId,
+                    commentId: commentId,
+                    themeId: themeId
+                })
+                results.push(comment)
+            }
+            return res.json({results})
         }
-        return res.json({results})
+        catch (e) {
+            console.log(e);
+        }
     }
 
     // функция createAll, для нескольких постов
