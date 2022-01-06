@@ -7,9 +7,9 @@ class CommentMarkController {
         let results = []
         for(let i in values){
             const {userId, commentId, themeId, toxic, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene} = values[i]
+                emotional_negative, rude, individual_obscene, group_obscene,neutral} = values[i]
             const comment_mark = await Comment_Mark.create({userId, commentId, toxic, themeId, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene})
+                emotional_negative, rude, individual_obscene, group_obscene,neutral})
             results.push(comment_mark)
         }
         return res.json({results})

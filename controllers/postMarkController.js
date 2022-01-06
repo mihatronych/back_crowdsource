@@ -7,9 +7,9 @@ class PostMarkController {
         let results = []
         for(let i in values){
             const {userId, postId, themeId, toxic, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene} = values[i]
+                emotional_negative, rude, individual_obscene, group_obscene,neutral} = values[i]
             const post_mark = await Post_Mark.create({userId, postId,themeId, toxic, emotional_positive,
-                emotional_negative, rude, individual_obscene, group_obscene})
+                emotional_negative, rude, individual_obscene, group_obscene,neutral})
             results.push(post_mark)
         }
 

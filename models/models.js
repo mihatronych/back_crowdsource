@@ -45,6 +45,7 @@ const Comment_Mark = sequelize.define('comment_mark', {
     rude: {type: DataTypes.INTEGER},
     individual_obscene: {type: DataTypes.INTEGER},
     group_obscene: {type: DataTypes.INTEGER},
+    neutral:{type: DataTypes.INTEGER},
     //theme_id: {type: DataTypes.INTEGER},
 })
 
@@ -58,6 +59,7 @@ const Post_Mark = sequelize.define('post_mark', {
     rude: {type: DataTypes.INTEGER},
     individual_obscene: {type: DataTypes.INTEGER},
     group_obscene: {type: DataTypes.INTEGER},
+    neutral:{type: DataTypes.INTEGER},
     //theme_id: {type: DataTypes.INTEGER},
 })
 
@@ -71,6 +73,7 @@ const Picture_Mark = sequelize.define('picture_mark', {
     rude: {type: DataTypes.INTEGER},
     individual_obscene: {type: DataTypes.INTEGER},
     group_obscene: {type: DataTypes.INTEGER},
+    neutral:{type: DataTypes.INTEGER},
     //theme_id: {type: DataTypes.INTEGER},
 })
 
